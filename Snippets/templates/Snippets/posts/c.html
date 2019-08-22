@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--  Importing the jquery , popper.js , bootstrap.min.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Make the image fully responsive */
+      .carousel-item {
+        height: 55vh;
+        min-height: 50px;
+        background: no-repeat;
+        background-size: cover;
+      }
+
+      .content {
+        max-width: 800px;
+        margin: auto;
+        padding: 10px;
+      }
+      .post-footer-option p{
+        float:left;
+        padding-bottom:5px;
+      }
+
+      .post-footer-option p{
+        color:#9CA4AB;
+        font-weight:500;
+        font-size:12px;
+      }
+      .post-footer-comment-wrapper{
+        background-color:#F6F7F8;
+      }
+    </style>
+  </head>
+
+  <body style="background-color:#E0E8F0">
+    <!-- COLLAPSIBLE  NAVBAR IN BOOTSTRAP -->
+    <div>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+        <a class="navbar-brand" href="#">Snippets</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span> <!-- Responsible for providing the toggle icon when window-size is less for a device-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../home.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../blog.html">Blogs</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../login.html">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- carousel bootstrap -->
+  <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url('https://images.wallpaperscraft.com/image/code_coding_binary_code_abstract_patterns_112140_3840x2400.jpg');">
+        <div class="carousel-caption"></div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Title-->
+    <p style="padding-top:25px;text-align:center;font-size:45px;"><font color="#0C4583"><b> Wonders of the C Language</b></font></p>
+    <div class="content">
+      <p style="font-family:Garamond;font-size:18px;text-align:center;">
+        Like most procedural languages in the ALGOL tradition, C has facilities for structured programming and allows lexical variable scope and recursion. Its static type system prevents unintended operations. In C, all executable code is contained within subroutines (also called "functions", though not strictly in the sense of functional programming). Function parameters are always passed by value. Pass-by-reference is simulated in C by explicitly passing pointer values. C program source text is free-format, using the semicolon as a statement terminator and curly braces for grouping blocks of statements.
+
+The C language also exhibits the following characteristics:
+
+There is a small, fixed number of keywords, including a full set of control flow primitives: if/else, for, do/while, while, and switch. User-defined names are not distinguished from keywords by any kind of sigil.
+There are a large number of arithmetic, bitwise and logic operators: +, +=, ++, &, ||, etc.
+More than one assignment may be performed in a single statement.
+Function return values can be ignored when not needed.
+Typing is static, but weakly enforced; all data has a type, but implicit conversions are possible.
+Declaration syntax mimics usage context. C has no "define" keyword; instead, a statement beginning with the name of a type is taken as a declaration. There is no "function" keyword; instead, a function is indicated by the parentheses of an argument list.
+User-defined (typedef) and compound types are possible.
+</p><br>
+<p style="font-family:Garamond;font-size:18px;text-align:center;">
+Heterogeneous aggregate data types (struct) allow related data elements to be accessed and assigned as a unit.
+Union is a structure with overlapping members; only the last member stored is valid.
+Array indexing is a secondary notation, defined in terms of pointer arithmetic. Unlike structs, arrays are not first-class objects: they cannot be assigned or compared using single built-in operators. There is no "array" keyword in use or definition; instead, square brackets indicate arrays syntactically, for example month[11].
+Enumerated types are possible with the enum keyword. They are freely interconvertible with integers.
+Strings are not a distinct data type, but are conventionally implemented as null-terminated character arrays.
+Low-level access to computer memory is possible by converting machine addresses to typed pointers.
+Procedures (subroutines not returning values) are a special case of function, with an untyped return type void.
+Functions may not be defined within the lexical scope of other functions.
+Function and data pointers permit ad hoc run-time polymorphism.
+</p><br>
+<p style="font-family:Garamond;font-size:18px;text-align:center;">
+A preprocessor performs macro definition, source code file inclusion, and conditional compilation.
+There is a basic form of modularity: files can be compiled separately and linked together, with control over which functions and data objects are visible to other files via static and extern attributes.
+Complex functionality such as I/O, string manipulation, and mathematical functions are consistently delegated to library routines.
+While C does not include certain features found in other languages (such as object orientation and garbage collection), these can be implemented or emulated, often through the use of external libraries (e.g., the GLib Object System or the Boehm garbage collector).
+
+Relations to other languages
+Many later languages have borrowed directly or indirectly from C, including C++, C#, Unix's C shell, D, Go, Java, JavaScript, Limbo, LPC, Objective-C, Perl, PHP, Python, Rust, Swift, Verilog and SystemVerilog (hardware description languages).[5] These languages have drawn many of their control structures and other basic features from C. Most of them (Python being a dramatic exception) also express highly similar syntax to C, and they tend to combine the recognizable expression and statement syntax of C with underlying type systems, data models, and semantics that can be radically different.
+      </p>
+      </div>
+      <div class="post-footer">
+                     <hr>
+                     <div class="post-footer-option container">
+                          <p><i>
+                            @2019 &nbsp; <a  href="../home.html" style="color:#9CA4AB;">Home</a> &nbsp;
+                            <a href="../blog.html" style="color:#9CA4AB;">Blogs</a>
+                          </i></p>
+                     </div>
+                     <div class="post-footer-comment-wrapper">
+                         <div class="comment-form">
+
+                         </div>
+                      </div>
+                   </div>
+               </div>
+  </body>
+</html>

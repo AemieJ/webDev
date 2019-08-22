@@ -1,0 +1,19 @@
+{%extends "Snippets/base.html" %}
+{% block content %}
+    <div class="content-section" style="padding:35px 10%;">
+        <div class="alert alert-success">
+            <strong>You've been logged out.</strong>
+        </div>
+
+        <div style="padding-top : 40px">
+            <img src="https://i.pinimg.com/originals/6d/48/d3/6d48d3c5c4bd9b4fe0a32b7f5c3dc69d.gif" class="center-logout">
+        </div>
+
+        <script>
+            // redirect to google after 3 seconds
+            window.setTimeout(function() {
+                window.location.href = '../';
+            }, 1000);
+        </script>
+    </div>
+{% endblock content %}

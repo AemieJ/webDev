@@ -1,0 +1,20 @@
+{% extends "Snippets/base.html" %}
+{% block content %}
+        <article class="Media content-section" style="padding:30px 20%;">
+            <div class="Media-body" style="padding-left:20px;padding-top:40px;">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                    <small class="text-muted">{{ object.date|date:"F d, Y"}}</small>
+                    {% if post.author == user %}
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-4 mb-1" href="{% url 'post-update' object.id %}" style="text-decoration:none;">Update &nbsp;</a>
+                        <a class="btn btn-danger btn-sm mt-4 mb-1" href="{% url 'post-delete' object.id %}" style="text-decoration:none;">Delete &nbsp;</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <h2>{{ object.title }}</h2>
+                <p class="article-content">{{ object.content }}</p>
+            </div>
+        </article>
+{% endblock content %}

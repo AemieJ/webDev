@@ -1,0 +1,32 @@
+<!-- Template meant for restricting some route accesses-->
+{%extends "Snippets/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section" style="padding:65px 20%;background-color: #f6f6f6">
+        <!-- Porfile picture with Name and Description-->
+        <div class="Media">
+        <img src="{{ user.profile.image.url }}"  class="Media-figure"> 
+            <div class="Media-body" style="float:left;padding-left:90px;padding-top:30px;">
+                    <p style="font-family:Garamond;font-size:29px;line-height: 0.7;"><strong> {{ user.username }}</strong> </p>
+                    <p style="font-family:Garamond;font-size:18px;line-height: 0.7;">{{ user.email}} </p>
+            </div>
+        </div>
+        <br>
+        <!-- Profile Info and Update-->
+        <!-- enctype is meant to save the image-->
+        <form method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Info</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }} <!-- Render our form as paragraph tags-->
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock content %}
+

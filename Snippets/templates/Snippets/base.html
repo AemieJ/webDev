@@ -1,0 +1,165 @@
+<!-- For organizing all the repeated code here -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      .Row-paginate
+{
+    display: table;
+    width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 10px; /*Optional*/
+}
+.Column-paginate
+{
+    display: table-cell;
+}
+    .carousel-item {
+    height: 55vh;
+    min-height: 50px;
+    background: no-repeat;
+    background-size: cover;
+  }
+  .post-footer-option p{
+    float:left;
+    padding-bottom:5px;
+  }
+
+  .post-footer-option p{
+    color:#9CA4AB;
+    font-weight:500;
+    font-size:12px;
+  }
+  .post-footer-comment-wrapper{
+    background-color:#F6F7F8;
+  }
+
+  .author{
+    opacity:0.85;
+    padding-bottom:4px;
+  }
+  .box{
+    padding: 50px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: top;
+    background: #fff;
+  }
+
+  .fonts{
+    font-size:15px;
+    opacity:0.6;
+  }
+  .row.no-gutters {
+    margin-right: 0;
+  }
+
+  #line{
+          height: .2px;
+        margin: 9px;
+        padding-bottom:5px;
+
+  }
+
+  .text{
+    padding : 70px 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .center-logout {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+  }
+
+  .Media {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .Media-figure {
+    margin-right: 1em;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .Media-body {
+    flex: 1;
+  }
+  </style>
+  </head>
+
+  <body>
+    <!-- COLLAPSIBLE  NAVBAR IN BOOTSTRAP -->
+    <div>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+        <a class="navbar-brand" href="#">Snippets</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span> <!-- Responsible for providing the toggle icon when window-size is less for a device-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Snippets'%}">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Blogs'%}">Blogs</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %} <!-- Show the logout route-->
+              {% if user.username == 'Aemie'  %}
+              <li class="nav-item">
+                 <a class="nav-link" href="{% url 'post-create'%}">Add</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile'%}">Profile</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+              </li>
+
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register'%}">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login'%}">Login</a>
+              </li>
+            {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+   <div>
+        {% if messages %}
+            {%for message in messages%}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+   </div>
+   
+   <!--  Importing the jquery , popper.js , bootstrap.min.js-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ </body>
+</html>

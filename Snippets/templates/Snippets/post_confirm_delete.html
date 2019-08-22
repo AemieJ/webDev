@@ -1,0 +1,17 @@
+{%extends "Snippets/base.html" %}
+{% block content %}
+  
+    <div class="content-section" style="padding:35px 10%;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <p style="font-family:cursive;font-size: 18px;"> Are you sure you want to delete the post "{{ object.title }}" ?</p>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

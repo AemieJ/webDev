@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--  Importing the jquery , popper.js , bootstrap.min.js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Make the image fully responsive */
+      .carousel-item {
+        height: 55vh;
+        min-height: 50px;
+        background: no-repeat;
+        background-size: cover;
+      }
+
+      .content {
+        max-width: 800px;
+        margin: auto;
+        padding: 10px;
+      }
+      .ludwig {
+        position: relative;
+        padding-left: 1em;
+        border-left: 0.2em solid gray;
+        font-family: Garamond;
+        font-size: 22px;
+        line-height: $base-line-height;
+        font-weight: 100;
+        &:before, &:after {
+          content: '\201C';
+          font-family: 'Sanchez';
+          color: lighten($black, 40%);
+        }
+        &:after {
+          content: '\201D';
+        }
+      }
+
+      .post-footer-option p{
+        float:left;
+        padding-bottom:5px;
+      }
+
+      .post-footer-option p{
+        color:#9CA4AB;
+        font-weight:500;
+        font-size:12px;
+      }
+      .post-footer-comment-wrapper{
+        background-color:#F6F7F8;
+      }
+    </style>
+  </head>
+
+  <body style="background-color:#E0E8F0">
+    <!-- COLLAPSIBLE  NAVBAR IN BOOTSTRAP -->
+    <div>
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-between">
+        <a class="navbar-brand" href="#">Snippets</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span> <!-- Responsible for providing the toggle icon when window-size is less for a device-->
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../home.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../blog.html">Blogs</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../login.html">Login</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- carousel bootstrap -->
+  <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url('https://www.masterword.com/wp-content/uploads/2018/05/Lotus-Flower-Guided-Meditation-BG.jpg');">
+        <div class="carousel-caption"></div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Title-->
+    <p style="padding-top:25px;text-align:center;font-size:45px;"><font color="#0C4583"><b>Lifestyle Tips</b></font></p>
+    <div class="content">
+      <p style="font-family:Garamond;font-size:18px;text-align:center;">
+        Yoga , as we all know has the power to change a person's lifestyle . You may not believe me but that's okay because I am here to make you believe it  .
+         You may think how do I know that ? Well answer to that , I am a yoga practitioner since 2014 and yoga has not only given me flexibility
+         physically but has also made me mentally strong and has taught me to how to think rationally in difficult situations .
+      </p><br>
+
+      <p  style="font-family:Garamond;font-size:18px;text-align:center;">
+        Meditation is one powerful tool of yoga which makes you mentally strong .
+        Along with meditation , regular practice of power yoga can give you physical strength as well .
+      </p><br>
+
+      <p  style="font-family:Garamond;font-size:18px;text-align:center;">
+        Yoga is important however during the hectic day of an individual , it's hard to find a time space to practice your own sequences .
+         This is where the 5-10-20 rule I came up with comes to place .
+      </p><br>
+
+      <blockquote class="ludwig"><i>
+        " The 5-10-20 Rule :
+          Make about 5 unique sequences that includes 2-5 of your 10 yoga poses and do yoga for 20 minutes which also includes sparing 5 minutes to your breathing exercise ."
+      </i></blockquote><br>
+
+      <p  style="font-family:Garamond;font-size:18px;text-align:center;">
+         It's obvious that you will be bored of performing the same sequences almost everyday so I suggest let's have 5 different sequences and repeat it periodically .
+          So now you know what the 5 in rule means . The next step is to list down the 10 major challenging yoga poses you enjoy .
+      </p><br>
+
+      <p  style="font-family:Garamond;font-size:18px;text-align:center;">
+         Now is the final step , your goal for every day is to perform a sequence within 20 minutes and this sequence can includes about 2-5 of your ten yoga poses you love to do .
+          Apart from these yoga poses , spare about 5 minutes on your breathing .
+      </p><br>
+
+      <p style="font-family:Garamond;font-size:18px;text-align:center;">
+        Let's end this blog . Hope to see your interest continue in all my other blogs.
+      </p><br>
+    </div>
+
+    <div class="post-footer">
+             <hr>
+            <div class="post-footer-option container">
+                        <p><i>
+                          @2019 &nbsp; <a  href="../home.html" style="color:#9CA4AB;">Home</a> &nbsp;
+                          <a href="../blog.html" style="color:#9CA4AB;">Blogs</a>
+                        </i></p>
+            </div>
+            <div class="post-footer-comment-wrapper">
+              <div class="comment-form">
+
+              </div>
+          </div>
+      </div>
+   </body>
+</html>

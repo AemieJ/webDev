@@ -1,0 +1,55 @@
+
+{% extends "Snippets/base.html" %}
+{% block content %}
+    <h3 class=" mb-3" style="padding-top:30px;padding-left:12%;color:#b1b1b1;font-family: cursive;"> Posts by {{ view.kwargs.username }} &nbsp;</h3>
+    {% for post in posts %}
+      <div  style="padding:10px 10%;"> 
+        <article class="Media content-section">
+          <div class="Media-body" style="border : 0.5px solid lightgray; border-radius:25px; padding:10px 5%;">
+            <div class="article-metadata" >
+              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
+              {% if post.author == user %}
+              <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
+              <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
+              {% endif %}
+            </div>
+            <hr>
+            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content|truncatechars:150 }}</p>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+    <br>
+    <div class="Row-paginate" style="padding:10px 10%;">
+      {% if is_paginated%}
+          <div class="Column-paginate text-left">
+          {% if page_obj.has_previous %}
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page=1" style="text-decoration:none;">First &nbsp;</a>-->
+              <a  href="?page={{page_obj.previous_page_number}}" style="text-decoration:none;font-size:200%;"> &laquo; </a>
+          {% endif%}
+          </div>
+
+          <div class="Column-paginate text-center">
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <a class = "btn btn-primary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2'%}
+            <a class = "btn btn-outline-secondary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+            {% endif %}
+
+          {% endfor %}
+          </div>
+
+          <div class="Column-paginate text-right">
+          {% if page_obj.has_next %}
+              <a  href="?page={{ page_obj.next_page_number}}" style="text-decoration:none;font-size:200%;"> &raquo; </a>
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page={{page_obj.paginator.num_pages}}" style="text-decoration:none;">Last</a>-->
+          {% endif%}
+          </div>
+
+    {% endif %}
+    </div>
+{% endblock content %}

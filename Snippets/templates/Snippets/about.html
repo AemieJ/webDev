@@ -1,0 +1,67 @@
+
+{% extends "Snippets/base.html" %}
+{% block content %}
+    {% for post in posts %}
+      <div  style="padding:10px 10%;"> 
+        <article class="Media content-section">
+          <div class="row no-gutters">
+            <div class="col-lg-3 pt-3">
+              <div class="card" style="height: 10rem;">
+                <img  src="{{ post.img.url }}" alt="Card image" style="height:10rem;width:100%;">
+                <a href="#" class="btn btn-link stretched-link"></a>
+              </div>
+            </div>
+            <div class="col-lg-8 pt-3">
+              <div class="card" style="height: 10rem;">
+                <div style="padding:8px 20px">
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content|truncatechars:150 }}</p>
+                <hr style="margin:0.4em auto;">
+                <div class="article-metadata" >
+                  <a class="mr-2" href="{% url 'user-posts' post.author.username %}" style="text-decoration: none;">{{ post.author }}</a>
+                  <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
+                  {% if post.author == user %}
+                  <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
+                  <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
+                  {% endif %}
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+    <br>
+
+    <div class="Row-paginate" style="padding:10px 10%;">
+      {% if is_paginated%}
+          <div class="Column-paginate text-left">
+          {% if page_obj.has_previous %}
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page=1" style="text-decoration:none;">First &nbsp;</a>-->
+              <a  href="?page={{page_obj.previous_page_number}}" style="text-decoration:none;font-size:200%;"> &laquo; </a>
+          {% endif%}
+          </div>
+
+          <div class="Column-paginate text-center">
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <a class = "btn btn-primary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2'%}
+            <a class = "btn btn-outline-secondary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+            {% endif %}
+
+          {% endfor %}
+          </div>
+
+          <div class="Column-paginate text-right">
+          {% if page_obj.has_next %}
+              <a  href="?page={{ page_obj.next_page_number}}" style="text-decoration:none;font-size:200%;"> &raquo; </a>
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page={{page_obj.paginator.num_pages}}" style="text-decoration:none;">Last</a>-->
+          {% endif%}
+          </div>
+
+    {% endif %}
+    </div>
+{% endblock content %}
