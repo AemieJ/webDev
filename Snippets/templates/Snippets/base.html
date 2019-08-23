@@ -156,6 +156,21 @@
         {% endif %}
         {% block content %}{% endblock %}
    </div>
+
+   <!-- Footer content-->
+  <div class="post-footer">
+    <hr>
+    <div class="post-footer-option container">
+      <p><i>
+          @2019 &nbsp; <a href="{% url 'Blogs' %}" style="color:#9CA4AB;">Blogs</a> &nbsp; <a href="{% url 'profile' %}" style="color:#9CA4AB">Profile</a> 
+        </i></p>
+    </div>
+    <div class="post-footer-comment-wrapper">
+      <div class="comment-form">
+  
+      </div>
+    </div>
+  </div>
    
    <!--  Importing the jquery , popper.js , bootstrap.min.js-->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

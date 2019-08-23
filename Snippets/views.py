@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 def about(request) :
     context = { 
         'posts' : Post.objects.all(), 
-        'title' : 'About Author' ,
+        'title' : 'About Author' 
     } 
     return render(request , 'Snippets/about.html' , context)
 
@@ -37,7 +37,6 @@ class PostCreateView(Login , CreateView):
 
     def form_valid(self,form) : 
         form.instance.author = self.request.user #Author for blog post is the current user
-        form.save()
         return super().form_valid(form)
 
 

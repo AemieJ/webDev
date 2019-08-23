@@ -1,93 +1,67 @@
-{% extends  "Snippets/base.html" %} 
+
+{% extends "Snippets/base.html" %}
 {% block content %}
-    <!-- Blog card designs -->
-  <div class="container mt-5 style="padding-top:40px;">
-      <div class="row no-gutters">
-        <div class="col-lg-3 col-sm-3 pt-3">
-          <div class="card" style="height: 10rem;">
-            <img  src="https://images.wallpaperscraft.com/image/code_coding_binary_code_abstract_patterns_112140_3840x2400.jpg" alt="Card image" style="height:10rem;width:100%;">
-            <a href="posts/c.html" class="btn btn-link stretched-link"></a>
-          </div>
-        </div>
-        <div class="col-lg-8 pt-3">
-          <div class="card" style="height: 10rem;">
-            <h4 class="pt-1 pl-3"><font color="#147176">C will Answer You </font></h4>
-            <p class="pt-1 pl-3 pr-3 fonts">C  is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, while a static type system prevents unintended operations.</p>
-            <hr id="line">
-            <h6 class="pl-3 author">Aemie Jariwala August 6,2019</h6>
-            <a href="posts/c.html" class="btn btn-link stretched-link"></a>
+    {% for post in posts %}
+      <div  style="padding:10px 10%;"> 
+        <article class="Media content-section">
+          <div class="row no-gutters">
+            <div class="col-lg-3 pt-3">
+              <div class="card" style="height: 10rem;">
+                <img  src="{{ MEDIA_URL }}{{ post.img.url }}" alt="Card image" style="height:10rem; width:100%;">
+                <a href="#" class="btn btn-link stretched-link"></a>
+              </div>
             </div>
-        </div>
+            <div class="col-lg-8 pt-3">
+              <div class="card" style="height: 10rem;">
+                <div style="padding:8px 20px">
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content|truncatechars:150 }}</p>
+                <hr style="margin:0.4em auto;">
+                <div class="article-metadata" >
+                  <a class="mr-2" href="{% url 'user-posts' post.author.username %}" style="text-decoration: none;">{{ post.author }}</a>
+                  <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
+                  {% if post.author == user %}
+                  <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
+                  <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
+                  {% endif %}
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
-  
-      <div class="row no-gutters">
-        <div class="col-lg-8 pt-4">
-          <div class="card" style="height: 10rem;">
-            <h4 class="pt-1 pl-3"><font color="#147176">Insight to Python</font></h4>
-            <p class="pt-1 pl-3 pr-3 fonts">Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991.</p>
-            <hr id="line">
-            <h6 class="pl-3 author">Aemie Jariwala August 4,2019</h6>
-            <a href="posts/python.html" class="btn btn-link stretched-link"></a>
+    {% endfor %}
+    <br>
+
+    <div class="Row-paginate" style="padding:10px 10%;">
+      {% if is_paginated%}
+          <div class="Column-paginate text-left">
+          {% if page_obj.has_previous %}
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page=1" style="text-decoration:none;">First &nbsp;</a>-->
+              <a  href="?page={{page_obj.previous_page_number}}" style="text-decoration:none;font-size:200%;"> &laquo; </a>
+          {% endif%}
           </div>
-        </div>
-        <div class="col-lg-3 pt-4">
-          <div class="card" style="height: 10rem;">
-            <img  src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BDRgGZhcWj7oti21x/videoblocks-abstract-blue-geometrical-background-with-moving-lines_bgcncknpz_thumbnail-full01.png" alt="Card image" style="height:10rem;width:100%;">
-            <a href="posts/python.html" class="btn btn-link stretched-link"></a>
+
+          <div class="Column-paginate text-center">
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <a class = "btn btn-primary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+
+            {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2'%}
+            <a class = "btn btn-outline-secondary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+            {% endif %}
+
+          {% endfor %}
           </div>
-        </div>
-      </div>
-  
-      <div class="row no-gutters">
-        <div class="col-lg-3 pt-4">
-          <div class="card" style="height: 10rem;">
-            <img  src="https://www.masterword.com/wp-content/uploads/2018/05/Lotus-Flower-Guided-Meditation-BG.jpg" alt="Card image" style="height:10rem;width:100%;">
-            <a href="posts/yoga.html" class="btn btn-link stretched-link"></a>
+
+          <div class="Column-paginate text-right">
+          {% if page_obj.has_next %}
+              <a  href="?page={{ page_obj.next_page_number}}" style="text-decoration:none;font-size:200%;"> &raquo; </a>
+              <!--<a class = "btn btn-outline-secondary mb-4" href="?page={{page_obj.paginator.num_pages}}" style="text-decoration:none;">Last</a>-->
+          {% endif%}
           </div>
-        </div>
-        <div class="col-lg-8 pt-4">
-          <div class="card" style="height: 10rem;">
-            <h4 class="pt-1 pl-3"><font color="#147176">Lifestyle Tips</font></h4>
-            <p class="pt-1 pl-3 pr-3 fonts">Yoga is a great way to work on your flexibility and strength. Just about everyone can do it, too.It's not just for people who can touch their toes or want to meditate.</p>
-            <hr id="line">
-            <h6 class="pl-3 author">Aemie Jariwala July 26,2019</h6>
-            <a href="posts/yoga.html" class="btn btn-link stretched-link"></a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="row no-gutters">
-        <div class="col-lg-8 pt-4 pb-3">
-          <div class="card" style="height: 10rem;">
-            <h4 class="pt-1 pl-3"><font color="#147176">The World of Mystery</font></h4>
-            <p class="pt-1 pl-3 pr-3 fonts">Mystery creates wonder and wonder is the basis of man's desire to understand.Mysteries abound where most we seek answers.</p>
-            <hr id="line">
-            <h6 class="pl-3 author">Aemie Jariwala July 20,2019</h6>
-            <a href="#" class="btn btn-link stretched-link"></a>
-          </div>
-        </div>
-        <div class="col-lg-3 pt-4 pb-3">
-          <div class="card" style="height: 10rem;">
-            <img  src="https://newevolutiondesigns.com/images/freebies/galaxy-wallpaper-36.jpg" alt="Card image" style="height:10rem;width:100%;">
-            <a href="#" class="btn btn-link stretched-link"></a>
-          </div>
-        </div>
-      </div>
-  
-     </div>
-  
-     <div class="post-footer">
-              <hr>
-             <div class="post-footer-option container">
-                         <p><i>
-                           @2019 &nbsp; <a  href="./home.html" style="color:#9CA4AB;">Home</a> &nbsp;
-                           <a href="./blog.html" style="color:#9CA4AB;">Blogs</a>
-                         </i></p>
-             </div>
-             <div class="post-footer-comment-wrapper">
-               <div class="comment-form">
-  
-               </div>
-           </div>
-       </div>
+
+    {% endif %}
+    </div>
 {% endblock content %}

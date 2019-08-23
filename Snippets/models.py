@@ -11,7 +11,7 @@ class Post(models.Model) :
     content = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User , on_delete=models.CASCADE) #If user deleted , delete their posts
-    img = models.ImageField(default='post_pics/default.jpg' , upload_to="post_pics")
+    img = models.ImageField(default='default.jpg' , upload_to="post_pics")
 
 
     def __str__(self) : 
