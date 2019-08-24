@@ -1,4 +1,5 @@
 from django.shortcuts import render , get_object_or_404
+from django.db.models import Q
 from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin as Login , UserPassesTestMixin as UserPass
@@ -7,9 +8,9 @@ from django.contrib.auth.models import User
 def about(request) :
     context = { 
         'posts' : Post.objects.all(), 
-        'title' : 'About Author' 
+        'title' : 'Blogs' 
     } 
-    return render(request , 'Snippets/about.html' , context)
+    return render(request , 'Snippets/blog.html' , context)
 
 class PostListView(ListView): 
     model = Post
@@ -27,6 +28,21 @@ class UserPostListView(ListView):
     def get_queryset(self) : 
             user = get_object_or_404(User , username=self.kwargs.get('username')) #get username from url
             return Post.objects.filter(author=user).order_by('-date')
+    
+    #def search(self,request): 
+    #    query = request.GET.get('q')
+    #    results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+
+class SearchPostListView(ListView) : 
+    model = Post
+    template_name = 'Snippets/search_post.html' #<app>/<model>_<viewtype>.html
+    context_object_name = 'posts'
+    paginate_by = 5 #Pagination
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        return results
 
 class PostDetailView(DetailView): 
     model = Post

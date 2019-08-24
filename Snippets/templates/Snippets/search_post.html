@@ -2,22 +2,7 @@
 {% extends "Snippets/base.html" %}
 {% block content %}
 
-    <nav class="navbar navbar-light justify-content-between" style="padding:24px 10%;">
-      <h3 class=" mb-3" style="color:#b1b1b1;font-family: cursive;">
-        Posts by {{ view.kwargs.username }} &nbsp;
-      </h3>
-      <form action="{% url 'search-posts' %}" method="get" class="form-inline" style="padding-right:10%;">
-        <input 
-          class="form-control mr-sm-2" 
-          type="search" 
-          placeholder="Search" aria-label="Search"
-          name="q"
-        >
-        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-      </form>
-    </nav>
-
-    {% for post in posts %}
+    {% for post in results %}
       <div  style="padding:10px 10%;"> 
         <article class="Media content-section">
           <div class="row no-gutters">
