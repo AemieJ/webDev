@@ -5,98 +5,93 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
     <style>
-      .Row-paginate
-{
-    display: table;
-    width: 100%; /*Optional*/
-    table-layout: fixed; /*Optional*/
-    border-spacing: 10px; /*Optional*/
-}
-.Column-paginate
-{
-    display: table-cell;
-}
-    .carousel-item {
-    height: 55vh;
-    min-height: 50px;
-    background: no-repeat;
-    background-size: cover;
-  }
-  .post-footer-option p{
-    float:left;
-    padding-bottom:5px;
-  }
+        .Row-paginate
+        {
+          display: table;
+          width: 100%; /*Optional*/
+          table-layout: fixed; /*Optional*/
+          border-spacing: 10px; /*Optional*/
+        } 
+        .Column-paginate
+        {
+          display: table-cell;
+        }
+        .carousel-item {
+        height: 55vh;
+        min-height: 50px;
+        background: no-repeat;
+        background-size: cover;
+        }
+        .author{
+          opacity:0.85;
+          padding-bottom:4px;
+        }
+        .box{
+          padding: 50px;
+          font-size: 32px;
+          font-weight: bold;
+          text-align: top;
+          background: #fff;
+        }
 
-  .post-footer-option p{
-    color:#9CA4AB;
-    font-weight:500;
-    font-size:12px;
-  }
-  .post-footer-comment-wrapper{
-    background-color:#F6F7F8;
-  }
+        .fonts{
+          font-size:15px;
+          opacity:0.6;
+        }
+        .row.no-gutters {
+          margin-right: 0;
+        }
+        footer{
+          padding-top: 10em;
+          padding-bottom : 20px;
+        }
 
-  .author{
-    opacity:0.85;
-    padding-bottom:4px;
-  }
-  .box{
-    padding: 50px;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: top;
-    background: #fff;
-  }
+        #line{
+                height: .2px;
+              margin: 9px;
+              padding-bottom:5px;
 
-  .fonts{
-    font-size:15px;
-    opacity:0.6;
-  }
-  .row.no-gutters {
-    margin-right: 0;
-  }
+        }
 
-  #line{
-          height: .2px;
-        margin: 9px;
-        padding-bottom:5px;
+        .text{
+          padding : 70px 30px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
 
-  }
+        .center-logout {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: auto;
+        }
 
-  .text{
-    padding : 70px 30px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+        .Media {
+          display: flex;
+          align-items: flex-start;
+        }
 
-  .center-logout {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: auto;
-  }
+        .Media-figure {
+          margin-right: 1em;
+          height: 150px;
+          width: 150px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
 
-  .Media {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .Media-figure {
-    margin-right: 1em;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .Media-body {
-    flex: 1;
-  }
-  </style>
+        .Media-body {
+          flex: 1;
+        }
+      
+    </style>
   </head>
 
   <body>
@@ -158,21 +153,17 @@
    </div>
 
    <!-- Footer content-->
-  <div class="post-footer">
+  <footer>
     <hr>
-    <div class="post-footer-option container">
-      <p><i>
+    <div class="container">
+      <small><i>
           @2019 &nbsp; <a href="{% url 'Blogs' %}" style="color:#9CA4AB;">Blogs</a> &nbsp; <a href="{% url 'profile' %}" style="color:#9CA4AB">Profile</a> 
-        </i></p>
+        </i></small>
     </div>
-    <div class="post-footer-comment-wrapper">
-      <div class="comment-form">
-  
-      </div>
-    </div>
-  </div>
+  </footer>
    
    <!--  Importing the jquery , popper.js , bootstrap.min.js-->
+   
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

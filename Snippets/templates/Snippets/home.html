@@ -50,54 +50,93 @@
 
     <!-- Grid based layout -->
     <div class="container mt-5" style="padding-top:80px;">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-            <!-- Card1 -->
-            <div class="card rounded" style="height: 30rem;">
-              <img class="card-img-top" src="https://i.udemycdn.com/course/750x422/523966_5833.jpg" alt="Card image" style="width:100%">
-              <div class="card-body">
-                <h4 class="card-title">C</h4>
-                <h5 class="card-title" style="padding-top:4px;font-size:13px;font-family:lucida handwriting">Answer to life , universe , everything.</h5>
-                <p class="card-text" style="padding-top:20px;text-align:center;">
-                  Explore the miracles C can do in your life . It will clear almost any doubt you ever had of life .
-                  Better try out this language , it will give you the same feels as GOT.
-                </p>
-                <a href="posts/c.html" class="btn btn-link stretched-link"></a>
+        <div class="row">                        
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+                <div class="card rounded" style="height: 30rem;">
+                  <img class="card-img-top" src="{{ MEDIA_URL }}{{ first.img.url }}" alt="Card image" style="width:100%; height:195px;">
+                  <div class="card-body">
+                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ first.title}}</h2>
+                    <p class="card-text" style="padding-top:20px;text-align:center;">
+                      {{ first.content|truncatechars:150 }}
+                    </p>
+                    <a href="{% url 'post-detail' first.id %}" class="btn btn-link stretched-link"></a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+              <div class="card rounded" style="height: 30rem;">
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{ second.img.url }}" alt="Card image" style="width:100%; height:195px;">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ second.title}}</h2>
+                  <p class="card-text" style="padding-top:20px;text-align:center;">
+                    {{ second.content|truncatechars:150 }}
+                  </p>
+                  <a href="{% url 'post-detail' second.id %}" class="btn btn-link stretched-link"></a>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- Card2 -->
-          <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-            <div class="card rounded" style="height: 30rem;">
-              <img class="card-img-top" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/BDRgGZhcWj7oti21x/videoblocks-abstract-blue-geometrical-background-with-moving-lines_bgcncknpz_thumbnail-full01.png" alt="Card image" style="width:100%; height:195px;">
-              <div class="card-body">
-                <h4 class="card-title">Insight to Python</h4>
-                <h5 class="card-title" style="padding-top:4px;font-size:13px;font-family:lucida handwriting">Everything is built-in for you , so just use it.</h5>
-                <p class="card-text" style="padding-top:20px;text-align:center;">
-                  Python is an experiment in how much freedom programmers need.Too much freedom and
-                  nobody can read another's code; too little and expressiveness is endangered.
-                </p>
-                <a href="posts/python.html" class="btn btn-link stretched-link"></a>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+              <div class="card rounded" style="height: 30rem;">
+                <img class="card-img-top" src="{{ third.img.url}}" alt="Card image" style="width:100%; height:195px;">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ third.title}}</h2>
+                  <p class="card-text" style="padding-top:20px;text-align:center;">
+                      {{ third.content|truncatechars:150 }}
+                  </p>
+                  <a href="{% url 'post-detail' third.id %}" class="btn btn-link stretched-link"></a>
+                </div>
               </div>
             </div>
+      
           </div>
-          <!-- Code3 -->
-          <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-            <div class="card rounded" style="height: 30rem;">
-              <img class="card-img-top" src="https://www.masterword.com/wp-content/uploads/2018/05/Lotus-Flower-Guided-Meditation-BG.jpg" alt="Card image" style="width:100%; height:195px;">
-              <div class="card-body">
-                <h4 class="card-title">Lifestyle Tips</h4>
-                <h5 class="card-title" style="padding-top:4px;font-size:13px;font-family:lucida handwriting">Important words coming from a yogi in making.</h5>
-                <p class="card-text" style="padding-top:20px;text-align:center;">
-                    You cannot always control what goes on outside.But you can always control
-                    what goes on inside.
-                </p>
-                <a href="posts/yoga.html" class="btn btn-link stretched-link"></a>
-              </div>
-            </div>
-          </div>
-    
         </div>
-      </div>
     
 {% endblock content %}
+
+<!--
+  <div class="container mt-5" style="padding-top:80px;">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+            
+            <div class="card rounded" style="height: 30rem;">
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{ first.img.url }}" alt="Card image" style="width:100%">
+                <div class="card-body">
+                  <h4 class="card-title"> {{ first.title}}</h4>
+                  <p class="card-text" style="padding-top:20px;text-align:center;">
+                    {{ first.content|truncatechars:80 }}
+                  </p>
+                  <a href="#" class="btn btn-link stretched-link"></a>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+              <div class="card rounded" style="height: 30rem;">
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{ second.img.url }}" alt="Card image" style="width:100%; height:195px;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ second.title}}/h4>
+                  <p class="card-text" style="padding-top:20px;text-align:center;">
+                    {{ second.content|truncatechars:80 }}
+                  </p>
+                  <a href="#" class="btn btn-link stretched-link"></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
+              <div class="card rounded" style="height: 30rem;">
+                <img class="card-img-top" src="{{ third.img.url}}" alt="Card image" style="width:100%; height:195px;">
+                <div class="card-body">
+                  <h4 class="card-title">{{ third.title}}</h4>
+                  <p class="card-text" style="padding-top:20px;text-align:center;">
+                      {{ third.content|truncatechars:150 }}
+                  </p>
+                  <a href="#" class="btn btn-link stretched-link"></a>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+-->

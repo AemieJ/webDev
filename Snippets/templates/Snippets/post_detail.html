@@ -1,6 +1,6 @@
 {% extends "Snippets/base.html" %}
-{% block content %}
 
+{% block content %}
         <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active"
@@ -12,18 +12,65 @@
         <article class="Media content-section" style="padding:30px 20%;">
             <div class="Media-body" style="padding-left:20px;padding-top:40px;">
                 <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
-                    <small class="text-muted">{{ object.date|date:"F d, Y"}}</small>
+                    <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
                     {% if post.author == user %}
                     <div>
-                        <a class="btn btn-secondary btn-sm mt-4 mb-1" href="{% url 'post-update' object.id %}" style="text-decoration:none;">Update &nbsp;</a>
-                        <a class="btn btn-danger btn-sm mt-4 mb-1" href="{% url 'post-delete' object.id %}" style="text-decoration:none;">Delete &nbsp;</a>
+                        <a class="btn btn-secondary btn-sm mt-4 mb-1" href="{% url 'post-update' post.id %}" style="text-decoration:none;">Update &nbsp;</a>
+                        <a class="btn btn-danger btn-sm mt-4 mb-1" href="{% url 'post-delete' post.id %}" style="text-decoration:none;">Delete &nbsp;</a>
                     </div>
                     {% endif %}
                 </div>
                 <hr>
-                <h2>{{ object.title }}</h2>
-                <p style="white-space: pre-wrap;">{{ object.content }}</p>
+                <h2>{{ post.title }}</h2>
+                <br>
+                <p style="white-space: pre-wrap;">{{ post.content }}</p>
+                <hr>
+                <div>
+                        <table style="margin-right:0;margin-left:auto;width: auto;">
+                            <tr>
+                                <td>
+                                    <a style="text-decoration: none;font-size:22px;" class="likebutton" id="like{{ post.id }}" href="#"
+                                        data-catid="{{ post.id }}"> &#9825;
+                                        {% for like in likes %}
+                                        {% ifequal post.title like.post.title %}
+                                        <small>{{like.count_like}}</small>
+                                        {{ "<!--" }}
+                                        {% endifequal %}
+                                        {% endfor %}
+                                        {{ "-->"}}</a>
+                                    <p id="message{{post.id}}"></p>
+                                </td>
+                        
+                            </tr>
+                        </table>
+                </div>
+                
+                
             </div>
         </article>
+        
+        <script type="text/javascript"> 
+            $('.likebutton').click(function(){ 
+            var id; 
+
+            id = $(this).attr("data-catid"); 
+            $.ajax( 
+            { 
+                type:"GET", 
+                url: "/like/", 
+                data : { 
+                        post_id : id ,
+                        
+            }, 
+            success: function( data ) 
+            { 
+                $( '#like'+ catid ).remove();
+                $( '#message' ).text(data);
+            } 
+            }) 
+            document.location.reload(true);
+            });
+        </script>
+
 {% endblock content %}

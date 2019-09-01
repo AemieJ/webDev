@@ -11,8 +11,7 @@ class Post(models.Model) :
     content = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User , on_delete=models.CASCADE) #If user deleted , delete their posts
-    img = models.ImageField(default='default.jpg' , upload_to="post_pics")
-
+    img = models.ImageField(default='default.jpg' , upload_to="post_pics")    
 
     def __str__(self) : 
         #What we want our database instance to print
@@ -24,9 +23,18 @@ class Post(models.Model) :
         img = Image.open(self.img.path)
         img.save(self.img.path)
 
+
     #Provide reverse which returns a string rather than redirecting
     def get_absolute_url(self) : 
         return reverse('post-detail', kwargs={'pk':self.pk})
 
 
 #Migrations helps in updation of our sql databases.
+class Like(models.Model):
+        post = models.ForeignKey(Post, on_delete = 'CASCADE')
+        count_like = models.IntegerField(default=0)
+
+        def __str__(self) : 
+            return '%s  | Likes : %s' % (self.post.title, self.count_like)
+
+

@@ -2,7 +2,15 @@
 {% extends "Snippets/base.html" %}
 {% block content %}
 
-    {% for post in results %}
+    <nav class="navbar navbar-light justify-content-between" style="padding:24px 10%;">
+        <h3 class="" style="color:#b1b1b1;font-family: cursive;">
+            Posts by {{ user }} &nbsp;
+        </h3>
+        <form action="{% url 'search-posts' %}" method="get" class="form-inline" style="padding-right:10%;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+        </form>
+    </nav>
+    {% for post in posts %}
       <div  style="padding:10px 10%;"> 
         <article class="Media content-section">
           <div class="row no-gutters">
@@ -39,17 +47,17 @@
           <div class="Column-paginate text-left">
           {% if page_obj.has_previous %}
               <!--<a class = "btn btn-outline-secondary mb-4" href="?page=1" style="text-decoration:none;">First &nbsp;</a>-->
-              <a  href="?page={{page_obj.previous_page_number}}" style="text-decoration:none;font-size:200%;"> &laquo; </a>
+              <a  href="?page={{page_obj.previous_page_number}}{% if query %}&q=query{% endif %}" style="text-decoration:none;font-size:200%;"> &laquo; </a>
           {% endif%}
           </div>
 
           <div class="Column-paginate text-center">
           {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
-              <a class = "btn btn-primary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+              <a class = "btn btn-primary mb-4" href="?page={{num}}{% if query %}&q=query{% endif %} " style="text-decoration:none;">{{num}} &nbsp;</a>
 
             {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2'%}
-            <a class = "btn btn-outline-secondary mb-4" href="?page={{num}} " style="text-decoration:none;">{{num}} &nbsp;</a>
+            <a class = "btn btn-outline-secondary mb-4" href="?page={{num}}{% if query %}&q=query{% endif %} " style="text-decoration:none;">{{num}} &nbsp;</a>
             {% endif %}
 
           {% endfor %}
@@ -57,7 +65,7 @@
 
           <div class="Column-paginate text-right">
           {% if page_obj.has_next %}
-              <a  href="?page={{ page_obj.next_page_number}}" style="text-decoration:none;font-size:200%;"> &raquo; </a>
+              <a  href="?page={{ page_obj.next_page_number}}{% if query %}&q=query{% endif %}" style="text-decoration:none;font-size:200%;"> &raquo; </a>
               <!--<a class = "btn btn-outline-secondary mb-4" href="?page={{page_obj.paginator.num_pages}}" style="text-decoration:none;">Last</a>-->
           {% endif%}
           </div>

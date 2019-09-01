@@ -1,9 +1,28 @@
 from django.shortcuts import render , get_object_or_404
-from django.db.models import Q
-from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView
-from .models import Post
+from django.db.models import Q , F
+from django.http import JsonResponse , HttpResponse
+from django.views.generic import ListView , DetailView , CreateView , UpdateView , DeleteView , RedirectView
+from .models import Post , Like
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin as Login , UserPassesTestMixin as UserPass
 from django.contrib.auth.models import User
+
+@login_required
+def like(request):
+    if request.method == 'GET':
+        post_id = request.GET['post_id']
+        likedpost = Post.objects.get(id = post_id)
+        m = Like( post=likedpost )
+        m.save() 
+        
+        list_postId = Like.objects.all().values('post')
+        for ids in list_postId :  
+                if post_id == str(ids['post']) : 
+                    m.count_like += 1
+        m.save()
+        return HttpResponse('success')
+    else:
+        return HttpResponse("unsuccesful")
 
 def about(request) :
     context = { 
@@ -28,10 +47,6 @@ class UserPostListView(ListView):
     def get_queryset(self) : 
             user = get_object_or_404(User , username=self.kwargs.get('username')) #get username from url
             return Post.objects.filter(author=user).order_by('-date')
-    
-    #def search(self,request): 
-    #    query = request.GET.get('q')
-    #    results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
 
 class SearchPostListView(ListView) : 
     model = Post
@@ -41,11 +56,21 @@ class SearchPostListView(ListView) :
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        results = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query))
-        return results
+        if query:
+            posts = Post.objects.filter(Q(title__icontains=query) | Q(content__icontains=query)).order_by('-date')
+        else : 
+            posts = Post.objects.all().order_by('-date')
+        return posts
 
 class PostDetailView(DetailView): 
     model = Post
+    context_object_name = 'post'
+    queryset = Post.objects.all()
+
+    def get_context_data(self ,**kwargs) :
+        context = super(PostDetailView,self).get_context_data(**kwargs)
+        context['likes'] = Like.objects.all().order_by('-count_like')
+        return context
 
 class PostCreateView(Login , CreateView): 
     model = Post
@@ -82,11 +107,19 @@ class PostDeleteView(Login , UserPass , DeleteView):
         else : 
             return False
 
-
 def home(request) :
 
     #Refer the subdirectory within the template directory
-    return render(request , 'Snippets/home.html')
+    first_post = Post.objects.all().order_by('-date')[0]
+    second_post = Post.objects.all().order_by('-date')[1]
+    third_post = Post.objects.all().order_by('-date')[2]
+    context = {
+        'first'  : first_post , 
+        'second' : second_post , 
+        'third'  : third_post
+
+    }
+    return render(request , 'Snippets/home.html' , context)
 
 def blog(request) : 
     return render(request , 'Snippets/blog.html')
