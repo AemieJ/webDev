@@ -1,7 +1,7 @@
 
 {% extends "Snippets/base.html" %}
 {% block content %}
-
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <nav class="navbar navbar-light justify-content-between" style="padding:24px 10%;">
         <h3 class="" style="color:#b1b1b1;font-family: cursive;">
             Posts by {{ user }} &nbsp;
@@ -23,7 +23,8 @@
             <div class="col-lg-8 pt-3">
               <div class="card" style="height: 10rem;">
                 <div style="padding:8px 20px">
-                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <a href="{% url 'post-detail' post.id %}" style="text-decoration: none;" class="viewbutton article-title" id="view{{ post.id }}"
+                data-catid="{{ post.id }}"><h2>{{ post.title }}</h2></a>
                 <p class="article-content">{{ post.content|truncatechars:150 }}</p>
                 <hr style="margin:0.4em auto;">
                 <div class="article-metadata" >
@@ -32,6 +33,23 @@
                   {% if post.author == user %}
                   <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
                   <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
+                  {% endif %}
+                  {% if post.author != user %}
+                        <a style="text-decoration: none;font-size:19px;float:right" class="likebutton" id="like{{ post.id }}" href="#"
+                        data-catid="{{ post.id }}"> &#9825;
+                        {% for like in likes %}
+                        {% ifequal post.id like.post %}
+                        <small>{{like.post_count}}</small>
+                        {% endifequal %}
+                        {% endfor %}
+                      </a>
+                      <a style="text-decoration: none;font-size:19px;float:right" href="#"><i style="font-size:17px;" class="fas">&#xf06e;</i>
+                        {% for view in views %}
+                        {% ifequal post.id view.post %}
+                        <small>{{view.post_view}}</small>
+                        {% endifequal %}
+                        {% endfor %} &nbsp; &nbsp;
+                      </a>
                   {% endif %}
                 </div>
               </div>
@@ -72,4 +90,25 @@
 
     {% endif %}
     </div>
+
+    <script type="text/javascript">
+      $('.viewbutton').click(function () {
+          var id;
+
+          id = $(this).attr("data-catid");
+          $.ajax(
+              {
+                  type: "GET",
+                  url: "/view/",
+                  data: {
+                      post_id: id,
+
+                  },
+                  success: function (data) {
+                      $('#message').text(data);
+                  }
+              })
+              document.location.reload(true);
+      });
+    </script>
 {% endblock content %}

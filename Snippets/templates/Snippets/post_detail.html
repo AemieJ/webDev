@@ -1,6 +1,7 @@
 {% extends "Snippets/base.html" %}
 
 {% block content %}
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active"
@@ -22,25 +23,36 @@
                     {% endif %}
                 </div>
                 <hr>
-                <h2>{{ post.title }}</h2>
+                <h2> {{ post.title }}</h2>
                 <br>
                 <p style="white-space: pre-wrap;">{{ post.content }}</p>
                 <hr>
                 <div>
                         <table style="margin-right:0;margin-left:auto;width: auto;">
                             <tr>
-                                <td>
-                                    <a style="text-decoration: none;font-size:22px;" class="likebutton" id="like{{ post.id }}" href="#"
-                                        data-catid="{{ post.id }}"> &#9825;
-                                        {% for like in likes %}
-                                        {% ifequal post.title like.post.title %}
-                                        <small>{{like.count_like}}</small>
-                                        {{ "<!--" }}
-                                        {% endifequal %}
-                                        {% endfor %}
-                                        {{ "-->"}}</a>
-                                    <p id="message{{post.id}}"></p>
-                                </td>
+                                    <td>
+                                        <a style="text-decoration: none;font-size:22px;" href="#"><i style="font-size:17px;" class="fas">&#xf06e;</i>
+                                            {% for view in views %}
+                                            {% ifequal post.id view.post %}
+                                            <small>{{view.post_view}}</small>
+                                            {% endifequal %}
+                                            {% endfor %}
+                                             &nbsp; &nbsp;
+                                        
+                                        </a>
+                                        <p id="message{{post.id}}"></p>
+                                    </td>
+                                    <td>
+                                        <a style="text-decoration: none;font-size:22px;" class="likebutton" id="like{{ post.id }}" href="#"
+                                            data-catid="{{ post.id }}"> &#9825; 
+                                            {% for like in likes %}
+                                            {% ifequal post.id like.post %}
+                                            <small>{{like.post_count}}</small>                                       
+                                            {% endifequal %}
+                                            {% endfor %}
+                                        </a>
+                                        <p id="message{{post.id}}"></p>
+                                    </td>
                         
                             </tr>
                         </table>
@@ -53,7 +65,6 @@
         <script type="text/javascript"> 
             $('.likebutton').click(function(){ 
             var id; 
-
             id = $(this).attr("data-catid"); 
             $.ajax( 
             { 
@@ -64,12 +75,33 @@
                         
             }, 
             success: function( data ) 
-            { 
-                $( '#like'+ catid ).remove();
+            {
                 $( '#message' ).text(data);
             } 
             }) 
             document.location.reload(true);
+            });
+        </script>
+        
+        <script type="text/javascript">
+            $('.viewbutton').click(function () {
+                var id;
+
+                id = $(this).attr("data-catid");
+                $.ajax(
+                    {
+                        type: "GET",
+                        url: "/view/",
+                        data: {
+                            post_id: id,
+
+                        },
+                        success: function (data) {
+                            $('#view' + catid).remove();
+                            $('#message').text(data);
+                        }
+                    })
+                    document.location.reload(true);
             });
         </script>
 

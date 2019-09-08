@@ -55,11 +55,13 @@
                 <div class="card rounded" style="height: 30rem;">
                   <img class="card-img-top" src="{{ MEDIA_URL }}{{ first.img.url }}" alt="Card image" style="width:100%; height:195px;">
                   <div class="card-body">
-                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ first.title}}</h2>
+                    <!--<h2 class="card-title" style="font-family:cursive;text-align:center">{{ first.title}}</h2>-->
+                    <a href="{% url 'post-detail' first.id %}" style="font-family:cursive;text-align:center;text-decoration: none;" class="viewbutton card-title" id="view{{ first.id }}"
+                    data-catid="{{ first.id }}"><h2>{{ first.title }}</h2></a>
                     <p class="card-text" style="padding-top:20px;text-align:center;">
                       {{ first.content|truncatechars:150 }}
                     </p>
-                    <a href="{% url 'post-detail' first.id %}" class="btn btn-link stretched-link"></a>
+                    <!--<a href="{% url 'post-detail' first.id %}" class="btn btn-link stretched-link"></a>-->
                   </div>
                 </div>
             </div>
@@ -67,11 +69,13 @@
               <div class="card rounded" style="height: 30rem;">
                 <img class="card-img-top" src="{{ MEDIA_URL }}{{ second.img.url }}" alt="Card image" style="width:100%; height:195px;">
                 <div class="card-body">
-                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ second.title}}</h2>
+                    <!--<h2 class="card-title" style="font-family:cursive;text-align:center">{{ second.title}}</h2>-->
+                    <a href="{% url 'post-detail' second.id %}" style="font-family:cursive;text-align:center;text-decoration: none;" class="viewbutton card-title" id="view{{ second.id }}"
+                    data-catid="{{ second.id }}"><h2>{{ second.title }}</h2></a>
                   <p class="card-text" style="padding-top:20px;text-align:center;">
                     {{ second.content|truncatechars:150 }}
                   </p>
-                  <a href="{% url 'post-detail' second.id %}" class="btn btn-link stretched-link"></a>
+                  <!--<a href="{% url 'post-detail' second.id %}" class="btn btn-link stretched-link"></a>-->
                 </div>
               </div>
             </div>
@@ -80,7 +84,9 @@
               <div class="card rounded" style="height: 30rem;">
                 <img class="card-img-top" src="{{ third.img.url}}" alt="Card image" style="width:100%; height:195px;">
                 <div class="card-body">
-                    <h2 class="card-title" style="font-family:cursive;text-align:center">{{ third.title}}</h2>
+                  <!--<h2 class="card-title" style="font-family:cursive;text-align:center">{{ third.title}}</h2>-->
+                  <a href="{% url 'post-detail' third.id %}" style="font-family:cursive;text-align:center;text-decoration: none;" class="viewbutton card-title" id="view{{ third.id }}"
+                    data-catid="{{ third.id }}"><h2>{{ third.title }}</h2></a>
                   <p class="card-text" style="padding-top:20px;text-align:center;">
                       {{ third.content|truncatechars:150 }}
                   </p>
@@ -91,52 +97,24 @@
       
           </div>
         </div>
+        
+        <script type="text/javascript">
+          $('.viewbutton').click(function () {
+              var id;
+              id = $(this).attr("data-catid");
+              $.ajax(
+                  {
+                      type: "GET",
+                      url: "/view/",
+                      data: {
+                          post_id: id,
     
+                      },
+                      success: function (data) {
+                          $('#message').text(data);
+                      }
+                  })
+                  document.location.reload(true);
+          });
+      </script>
 {% endblock content %}
-
-<!--
-  <div class="container mt-5" style="padding-top:80px;">
-        <div class="row">
-          <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-            
-            <div class="card rounded" style="height: 30rem;">
-                <img class="card-img-top" src="{{ MEDIA_URL }}{{ first.img.url }}" alt="Card image" style="width:100%">
-                <div class="card-body">
-                  <h4 class="card-title"> {{ first.title}}</h4>
-                  <p class="card-text" style="padding-top:20px;text-align:center;">
-                    {{ first.content|truncatechars:80 }}
-                  </p>
-                  <a href="#" class="btn btn-link stretched-link"></a>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-              <div class="card rounded" style="height: 30rem;">
-                <img class="card-img-top" src="{{ MEDIA_URL }}{{ second.img.url }}" alt="Card image" style="width:100%; height:195px;">
-                <div class="card-body">
-                  <h4 class="card-title">{{ second.title}}/h4>
-                  <p class="card-text" style="padding-top:20px;text-align:center;">
-                    {{ second.content|truncatechars:80 }}
-                  </p>
-                  <a href="#" class="btn btn-link stretched-link"></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6 col-sm-12 pt-3">
-              <div class="card rounded" style="height: 30rem;">
-                <img class="card-img-top" src="{{ third.img.url}}" alt="Card image" style="width:100%; height:195px;">
-                <div class="card-body">
-                  <h4 class="card-title">{{ third.title}}</h4>
-                  <p class="card-text" style="padding-top:20px;text-align:center;">
-                      {{ third.content|truncatechars:150 }}
-                  </p>
-                  <a href="#" class="btn btn-link stretched-link"></a>
-                </div>
-              </div>
-            </div>
-      
-          </div>
-        </div>
--->

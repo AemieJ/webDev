@@ -4,6 +4,7 @@ from django.contrib.auth.models import User #The users dealing with the website
 from django.urls import reverse
 
 from PIL import Image 
+from users.models import Profile
 
 #Creating the databases
 class Post(models.Model) : 
@@ -33,8 +34,14 @@ class Post(models.Model) :
 class Like(models.Model):
         post = models.ForeignKey(Post, on_delete = 'CASCADE')
         count_like = models.IntegerField(default=0)
+        default_count = models.IntegerField(default=0)
+        def __str__(self) : 
+            return '%s  | Likes : %s' % (self.post.title , self.count_like)
+
+
+class ViewPost(models.Model):
+        post = models.ForeignKey(Post, on_delete = 'CASCADE')
+        count_views = models.IntegerField(default=0)
 
         def __str__(self) : 
-            return '%s  | Likes : %s' % (self.post.title, self.count_like)
-
-
+            return '%s  | Views : %s' % (self.post.title, self.count_views)
