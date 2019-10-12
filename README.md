@@ -1,5 +1,5 @@
 # Web Developmment
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8a7037bf-49fb-4ce3-98ef-a45eaf6c117e/deploy-status)](https://app.netlify.com/sites/coyle/deploys)
+
 > Newbie to Django  
 ## Insight to Project
 
