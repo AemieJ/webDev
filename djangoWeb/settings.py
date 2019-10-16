@@ -26,7 +26,8 @@ SECRET_KEY = ')4jft9bu!21b#(=0i*qtlu5!4nztn*px-efk(0li9dx%(xozaj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['coyle.herokuapp.com']
+ALLOWED_HOSTS = ['coyle.herokuapp.com' , 
+                 'localhost']
 
 
 
