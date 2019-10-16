@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url 
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,12 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = ')4jft9bu!21b#(=0i*qtlu5!4nztn*px-efk(0li9dx%(xozaj'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = ')4jft9bu!21b#(=0i*qtlu5!4nztn*px-efk(0li9dx%(xozaj'
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE')=='True')
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['coyle.herokuapp.com' , 
+                 'localhost']
 
 
 
@@ -141,3 +142,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
 #DEFAULT_FILE_STORAGE='storage.backends.s3boto3.S3Boto3Storage'
+#django_heroku.settings(locals())
