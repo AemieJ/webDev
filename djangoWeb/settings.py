@@ -141,4 +141,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
 #DEFAULT_FILE_STORAGE='storage.backends.s3boto3.S3Boto3Storage'
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
