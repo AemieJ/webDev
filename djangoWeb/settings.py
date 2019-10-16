@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku 
+import dj_database_url 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -141,5 +141,3 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 
 #DEFAULT_FILE_STORAGE='storage.backends.s3boto3.S3Boto3Storage'
-#bywxagtgdlwiaymw
-#django_heroku.settings(locals())
