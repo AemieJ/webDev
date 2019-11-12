@@ -6,45 +6,47 @@
       <div  style="padding:10px 10%;"> 
         <article class="Media content-section">
           <div class="row no-gutters">
-            <div class="col-lg-3 pt-3">
+            <div class="col-lg-3 d-none d-md-block pt-3">
               <div class="card" style="height: 10rem;">
                 <img  src="{{ MEDIA_URL }}{{ post.img.url }}" alt="Card image" style="height:10rem; width:100%;">
                 <a href="#" class="btn btn-link stretched-link"></a>
               </div>
             </div>
-            <div class="col-lg-8 pt-3">
+            <div class="col-lg-8 col-md-12 col-sm-12 pt-lg-3">
               <div class="card" style="height: 10rem;">
-                <div style="padding:8px 20px">
+                <div style="padding: 8px 20px">
                 <a href="{% url 'post-detail' post.id %}" style="text-decoration: none;" class="viewbutton article-title" id="view{{ post.id }}"
                 data-catid="{{ post.id }}"><h2>{{ post.title }}</h2></a>
                 <p class="article-content">{{ post.content|truncatechars:150 }}</p>
-                <hr style="margin:0.4em auto;">
-                <div class="article-metadata" >
-                  <a class="mr-2" href="{% url 'user-posts' post.author.username %}" style="text-decoration: none;">{{ post.author }}</a>
-                  <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
-                  {% if post.author == user %}
-                  <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
-                  <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
-                  {% endif %}
 
-                  {% if post.author != user %}
-                        <a style="text-decoration: none;font-size:18px;float:right;" class="likebutton" id="like{{ post.id }}" href="#"
-                        data-catid="{{ post.id }}"> &#9825;
-                        {% for like in likes %}
-                        {% ifequal post.id like.post %}
-                        <small>{{like.post_count}}</small>
-                        {% endifequal %}
-                        {% endfor %}
+                <div class="d-none d-md-block">
+                  <hr style="margin:0.4em auto;">
+                  <div class="article-metadata" >
+                    <a class="mr-2" href="{% url 'user-posts' post.author.username %}" style="text-decoration: none;">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date|date:"F d, Y"}}</small>
+                    {% if post.author == user %}
+                    <a href="{% url 'post-delete' post.id %}" style="float:right;text-decoration:none;">Delete &nbsp;</a> 
+                    <a href="{% url 'post-update' post.id %}" style="float:right;text-decoration:none;">Update &nbsp;</a> 
+                    {% endif %}
+  
+                    {% if post.author != user %}
+                          <a style="text-decoration: none;font-size:18px;float:right;" class="likebutton" id="like{{ post.id }}" href="#"
+                          data-catid="{{ post.id }}"> &#9825;
+                          {% for like in likes %}
+                          {% ifequal post.id like.post %}
+                          <small>{{like.post_count}}</small>
+                          {% endifequal %}
+                          {% endfor %}
+                          </a>
+                        <a style="text-decoration: none;font-size:18px;float:right;" href="#"><i style="font-size:17px;" class="fas">&#xf06e;</i>
+                          {% for view in views %}
+                          {% ifequal post.id view.post %}
+                          <small>{{view.post_view}}</small>
+                          {% endifequal %}
+                          {% endfor %} &nbsp; &nbsp;
                         </a>
-                      <a style="text-decoration: none;font-size:18px;float:right;" href="#"><i style="font-size:17px;" class="fas">&#xf06e;</i>
-                        {% for view in views %}
-                        {% ifequal post.id view.post %}
-                        <small>{{view.post_view}}</small>
-                        {% endifequal %}
-                        {% endfor %} &nbsp; &nbsp;
-                      </a>
-                  {% endif %}
-
+                    {% endif %}
+                  </div>
                 </div>
               </div>
               </div>
