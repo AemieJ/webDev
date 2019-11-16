@@ -9,6 +9,21 @@ Bootstrap is an open source toolkit for developing with HTML, CSS, and JS and qu
 
 Django is a Python-based free and open-source web framework, which follows the model-template-view architectural pattern.
 
+## Running on your local system 
+
+1. Clone the repositry on your local system.
+    ```
+    git clone 'https://github.com/AemieJ/webDev.git'
+    ```
+2. Move into your directory by using the ```cd webDev``` command.
+3. To start running the website on your system , use the following command and use localhost:8000 to be directed to the     website on your browser.
+    ```
+    python manage.py runserver
+    ```
+4. To make yourself the admin of the website , use the following command and in ```localhost:8000/admin``` you'll be        given the access to the database by logging in.
+    ```
+    python manage.py createsuperuser
+    ```
 
 
 ## Built With

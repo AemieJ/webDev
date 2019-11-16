@@ -28,6 +28,9 @@ def counter( username , post , current_user , current_post) :
     return count
 
 def like(request):
+    if not request.user.is_authenticated : 
+        messages.info(request , 'User needs to be logged in to like the blog.')
+
     if request.user.is_authenticated :
         if request.method == 'GET':
             post_id = request.GET['post_id']
@@ -52,8 +55,6 @@ def like(request):
             return HttpResponse('success')
         else:
             return HttpResponse("unsuccesful")
-    else : 
-        messages.info(request , 'User needs to be logged in to like the blog.')
 
 def counterIp(ip , current_ip) : 
     count = 0 
@@ -189,17 +190,17 @@ class PostUpdateView(Login , UserPass , UpdateView):
         else : 
             return False
 
-#Problem Faced : Need to delete objects from various models 
+#Problem Faced : Unable to delete the post.
 class PostDeleteView(Login , UserPass , DeleteView): 
     model = Post
-    success_url = reverse_lazy('Snippets')
+    success_url ='/'
 
-    '''def test_func(self) : 
+    def test_func(self) : 
         post = self.get_object()
         if self.request.user == post.author : 
             return True 
         else : 
-            return False'''
+            return False
 
 def home(request) :
 
